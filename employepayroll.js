@@ -1,7 +1,7 @@
 class EmployeePayroll{
     id;
     salary;
-    gender
+    gender;
     startdate;
 
     constructor(...params){
@@ -13,7 +13,15 @@ class EmployeePayroll{
     } 
 
     get name(){ return this._name;}
-    set name(name){ this._name=name;}
+    set name(name){ 
+        let regexname=RegExp('[A-Z]{1}[a-z]{3,}');
+        if(regexname.test(name)){
+            this._name=name;
+        }
+        else{
+            throw "Name is Incorrect";
+        }
+    }
 
     toString(){
         return "id=" +this.id+ ", name= " +this.name+ ", salary= " +this.salary+ " , gender= " +this.gender+
@@ -23,9 +31,12 @@ class EmployeePayroll{
 
 let employeePayroll = new EmployeePayroll(1,"Deep",20000);
 console.log(employeePayroll.toString());
-
-employeePayroll.name="Manish";
-console.log(employeePayroll.toString());
+try{
+    employeePayroll.name="manish";
+    console.log(employeePayroll.toString());
+}catch(e){
+    console.error(e);
+}
 
 let newemployeePayroll = new EmployeePayroll(2,"Roshni",98000,"F",new Date("03-02-2019"));
 console.log(newemployeePayroll.toString());
